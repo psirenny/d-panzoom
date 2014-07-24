@@ -94,12 +94,4 @@ Component.prototype._methods.forEach(function (name) {
   };
 });
 
-Component.prototype.zoomIn = function () {
-  $(this.image).panzoom('zoom');
-};
-
-Component.prototype.zoomOut = function () {
-  $(this.image).panzoom('zoom', true);
-};
-
 module.exports = Component;
