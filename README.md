@@ -9,6 +9,9 @@ Installation
 
     $ npm install d-panzoom --save
 
+Usage
+-----
+
 Create a view:
 
     <panzoom:>
@@ -23,8 +26,7 @@ Associate the view with the component:
 
     app.use('panzoom', require('d-panzoom'));
 
-Usage
------
+Use the view:
 
     <div>
       <view name="panzoom" minScale="1" maxScale="5" src="...">
