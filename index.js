@@ -29,8 +29,8 @@ Component.prototype.init = function (model) {
 Component.prototype.create = function (model) {
   var self = this;
 
-  model.on('change', 'options', function (opts) {
-    $(self.image).panzoom('option', opts);
+  model.on('change', 'options', function (options) {
+    $(self.image).panzoom('option', options);
   });
 
   model.on('change', 'options.*', function (name, value) {
@@ -50,37 +50,37 @@ Component.prototype.create = function (model) {
 
 Component.prototype.panzoom = function () {
   var self = this;
-  var opts = this.model.get('options') || {};
+  var options = this.model.get('options') || {};
 
   if (this.range) {
-    opts.$zoomRange = $(this.range);
+    options.$zoomRange = $(this.range);
   }
 
-  opts.onChange = function (e, panzoom, transform) {
+  options.onChange = function (e, panzoom, transform) {
     self.emit('change', transform);
   };
 
-  opts.onEnd = function (e, panzoom, matrix, changed) {
+  options.onEnd = function (e, panzoom, matrix, changed) {
     self.emit('end', matrix, changed)
   }
 
-  opts.onPan = function (e, panzoom, x, y) {
+  options.onPan = function (e, panzoom, x, y) {
     self.emit('pan', x, y);
   }
 
-  opts.onReset = function () {
+  options.onReset = function () {
     self.emit('resize');
   };
 
-  opts.onStart = function (e, panzoom, event, touches) {
+  options.onStart = function (e, panzoom, event, touches) {
     self.emit('start', event, touches);
   }
 
-  opts.onZoom = function (e, panzoom, scale, opts) {
+  options.onZoom = function (e, panzoom, scale, opts) {
     self.emit('zoom', scale, opts);
   }
 
-  $(this.image).panzoom(opts);
+  $(this.image).panzoom(options);
 };
 
 Component.prototype.reset = function (options) {
