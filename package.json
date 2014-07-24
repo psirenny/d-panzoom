@@ -1,0 +1,26 @@
+{
+  "author": "Dennis Torres <djtorres0@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/psirenny/d-panzoom/issues"
+  },
+  "description": "A Derby JS component for jQuery Panzoom.",
+  "keywords": [
+    "derby",
+    "image",
+    "pan",
+    "scale",
+    "zoom"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "d-panzoom",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/psirenny/d-panzoom.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.1.0"
+}
