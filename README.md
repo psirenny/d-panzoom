@@ -38,4 +38,4 @@ Use the view:
       <script src="jquery.panzoom.js">
 
     <Body:>
-      <view name="panzoom" minScale="1" maxScale="5" src="...">
+      <view name="panzoom" minScale="1" maxScale="5" src="..."></view>
