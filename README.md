@@ -9,6 +9,12 @@ Installation
 
     $ npm install d-panzoom --save
 
+Dependencies
+------------
+
+This component requires [jQuery Panzoom](https://github.com/timmywil/jquery.panzoom) in order to work.
+It does not include the script so must include it in the page.
+
 Usage
 -----
 
@@ -28,6 +34,8 @@ Associate the view with the component:
 
 Use the view:
 
-    <div>
+    <Scripts:>
+      <script src="jquery.panzoom.js">
+
+    <Body:>
       <view name="panzoom" minScale="1" maxScale="5" src="...">
-    </div>
