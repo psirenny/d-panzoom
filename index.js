@@ -1,5 +1,25 @@
 function Component () {};
 
+Component.prototype._events = [
+  'change',
+  'end',
+  'pan',
+  'reset',
+  'start',
+  'zoom'
+];
+
+Component.prototype._methods = [
+  'destroy',
+  'disable',
+  'enable',
+  'reset',
+  'resetDimensions',
+  'resetPan',
+  'resetZoom',
+  'zoom'
+];
+
 Component.prototype._options = [
   'contain',
   'cursor',
@@ -56,48 +76,23 @@ Component.prototype.panzoom = function () {
     options.$zoomRange = $(this.range);
   }
 
-  options.onChange = function (e, panzoom, transform) {
-    self.emit('change', transform);
-  };
-
-  options.onEnd = function (e, panzoom, matrix, changed) {
-    self.emit('end', matrix, changed)
-  }
-
-  options.onPan = function (e, panzoom, x, y) {
-    self.emit('pan', x, y);
-  }
-
-  options.onReset = function () {
-    self.emit('resize');
-  };
-
-  options.onStart = function (e, panzoom, event, touches) {
-    self.emit('start', event, touches);
-  }
-
-  options.onZoom = function (e, panzoom, scale, opts) {
-    self.emit('zoom', scale, opts);
-  }
+  this._events.forEach(function (name) {
+    var fn = 'on' + name[0].toUpperCase() + name.substring(1);
+    options[fn] = function () {
+      var args = [].splice.call(arguments, 2);
+      args = [name].concat(args);
+      self.emit.apply(self, args);
+    };
+  });
 
   $(this.image).panzoom(options);
 };
 
-Component.prototype.reset = function (options) {
-  $(this.image).panzoom('reset', options);
-};
-
-Component.prototype.resetPan = function (options) {
-  $(this.image).panzoom('resetPan', options);
-};
-
-Component.prototype.resetZoom = function (options) {
-  $(this.image).panzoom('resetZoom', options);
-};
-
-Component.prototype.zoom = function (scale, opts) {
-  $(this.image).panzoom('zoom', scale, opts);
-};
+Component.prototype._methods.forEach(function (name) {
+  Component.prototype[name] = function () {
+    $(this.image).panzoom(name).apply(this, arguments);
+  };
+});
 
 Component.prototype.zoomIn = function () {
   $(this.image).panzoom('zoom');
