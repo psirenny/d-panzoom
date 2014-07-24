@@ -13,7 +13,7 @@ Dependencies
 ------------
 
 This component requires [jQuery Panzoom](https://github.com/timmywil/jquery.panzoom) in order to work.
-It does not include the script so must include it in the page.
+It does not include the script for you. You must include it on the page.
 
 Usage
 -----
