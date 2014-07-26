@@ -90,7 +90,9 @@ Component.prototype.panzoom = function () {
 
 Component.prototype._methods.forEach(function (name) {
   Component.prototype[name] = function () {
-    $(this.image).panzoom(name).apply(this, arguments);
+    var args = [name].concat([].splice.call(arguments));
+    var $image = $(this.image);
+    $image.panzoom.apply($image, args);
   };
 });
 
