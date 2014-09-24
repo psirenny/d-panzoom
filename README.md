@@ -20,7 +20,7 @@ Usage
 
 Create a view:
 
-    <panzoom:>
+    <index: element="panzoom">
       <img alt="" as="image" src="{{@src}}">
       <button on-click="zoom()" type="button">Zoom in</button>
       <button on-click="zoom(true)" type="button">Zoom out</button>
