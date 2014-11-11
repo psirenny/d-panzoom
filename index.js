@@ -1,6 +1,8 @@
-function Component () {};
+function Component () {}
 
-Component.prototype._events = [
+Component.prototype._panzoom = {};
+
+Component.prototype._panzoom.events = [
   'change',
   'end',
   'pan',
@@ -9,7 +11,7 @@ Component.prototype._events = [
   'zoom'
 ];
 
-Component.prototype._methods = [
+Component.prototype._panzoom.methods = [
   'destroy',
   'disable',
   'enable',
@@ -20,7 +22,7 @@ Component.prototype._methods = [
   'zoom'
 ];
 
-Component.prototype._options = [
+Component.prototype._panzoom.options = [
   'contain',
   'cursor',
   'disablePan',
@@ -39,7 +41,7 @@ Component.prototype._options = [
 Component.prototype.init = function (model) {
   var self = this;
 
-  this._options.forEach(function (name) {
+  this._panzoom.options.forEach(function (name) {
     var value = model.get(name);
     if (typeof value === 'undefined') return;
     model.set('options.' + name, value);
@@ -57,7 +59,7 @@ Component.prototype.create = function (model) {
     $(self.image).panzoom('option', name, value);
   });
 
-  this._options.forEach(function (name) {
+  this._panzoom.options.forEach(function (name) {
     model.on('change', name, function (value) {
       model.set('options.' + name, value);
     });
@@ -76,7 +78,7 @@ Component.prototype.panzoom = function () {
     options.$zoomRange = $(this.range);
   }
 
-  this._events.forEach(function (name) {
+  this._panzoom.events.forEach(function (name) {
     var fn = 'on' + name[0].toUpperCase() + name.substring(1);
     options[fn] = function () {
       var args = [].splice.call(arguments, 2);
@@ -88,7 +90,7 @@ Component.prototype.panzoom = function () {
   $(this.image).panzoom(options);
 };
 
-Component.prototype._methods.forEach(function (name) {
+Component.prototype._panzoom.methods.forEach(function (name) {
   Component.prototype[name] = function () {
     var args = [name].concat([].splice.call(arguments));
     var $image = $(this.image);
